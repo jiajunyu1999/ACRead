@@ -30,7 +30,8 @@ The model configuration is as follows:
 - **GNN Backbone:** Dropout rate of 0.5, 2 message-passing layers, 300-dimensional embeddings.
 - **Optimization:** Batch size of 256, learning rate of 0.001, weight decay of 0.0001, early stopping with a patience of 50 epochs.
 - **Evaluation:** Performed using 10-fold cross-validation.
-- **Readout Operation:** ACRead readout operation using the Hadamard dot product as the \( g_{\Psi} \) function, 9 centralities, 4 attention heads.
+- **Readout Operation:** ACRead readout operation using the Hadamard dot product as the $ g_{\Psi}$ function, 9 centralities, 4 attention heads, $f_W$ is the different GNN backbone.
+
 
 ## Usage
 
