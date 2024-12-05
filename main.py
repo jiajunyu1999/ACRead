@@ -298,10 +298,7 @@ def main(args):
     times = np.array(times)*1000
     print('Valid Acc:{:.4f}, Std:{:.4f}, Test Acc:{:.4f}, Std:{:.4f}'.format(np.mean(valid_list), np.std(valid_list), np.mean(test_list), np.std(test_list)))
     print('Mean time :{:.4f}, Std:{:.4f} (ms)'.format(np.mean(times), np.std(times)))
-    with open(f'./rebuttal_{args.set}.csv','a+')as f:
-        f.write('{},{},{},{},{},{:.4f},{:.4f},{:.4f},{:.4f}\n'.format(
-            args.dataset, args.read_op, args.head, args.score_nums, args.phi, np.mean(test_list), np.std(test_list), np.mean(times), np.std(times)
-        ))
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
