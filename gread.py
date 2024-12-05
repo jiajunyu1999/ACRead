@@ -66,7 +66,7 @@ class ACRead(torch.nn.Module):
         self.edge_encoder = MLP(num_edgefeats, self.hid_dim)   
         self.init_x_encoder_mlp = MLP(in_dim, hid_dim)
 
-        self.att_encoder = MultiHeadAttention(self.args.head, self.score_nums, 32, args)
+        self.att_encoder = MultiHeadAttention(self.args.head, self.score_nums, 128, args)
         
         self.score_norm = nn.BatchNorm1d(self.score_nums)
         self.x_norm = nn.BatchNorm1d(self.hid_dim)
@@ -86,7 +86,7 @@ class ACRead(torch.nn.Module):
         self.bond_encoder = BondEncoder(emb_dim = num_edgefeats)
 
         self.s_lin = nn.Linear(self.hid_dim, 1)
-        self.map_layer = nn.Linear(32, self.hid_dim)
+        self.map_layer = nn.Linear(128, self.hid_dim)
         self.fusion_batch_norm = nn.BatchNorm1d(self.hid_dim)
         self.fusion_layer1 = nn.Linear(self.hid_dim, self.hid_dim)
         self.fusion_layer2 = nn.Linear(self.hid_dim, self.hid_dim)
