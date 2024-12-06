@@ -238,7 +238,6 @@ def main(args):
     num_classes = int(dataset.data.y.max()) + 1
     split_idx = get_kfold_idx_split(dataset, num_fold=args.num_fold, random_state=args.seed)
     valid_list, test_list = [], []
-    times = []
 
     # if args.dataset == 'PROTEINS':
     #     num_nodefeats = dataset.filter_x.shape[1] - 1
@@ -263,7 +262,6 @@ def main(args):
         
         valid_curve, test_curve = [], []
         best_valid_perf, no_improve_cnt = -np.inf, 0
-        t = time.time()
         for epoch in range(1, args.max_epochs + 1):
             loss = train(model, device, train_loader, optimizer_gnn, optimizer_seg, args)
             valid_perf = eval(model, device, valid_loader)
@@ -281,7 +279,6 @@ def main(args):
             else:
                 no_improve_cnt += 1
             
-        times.append((time.time() - t)/epoch)
         best_val_epoch = np.argmax(np.array(valid_curve))
 
         print('%2d-fold Valid\t%.6f'%(fold_idx+1, valid_curve[best_val_epoch]))
@@ -295,10 +292,7 @@ def main(args):
  
     valid_list = np.array(valid_list)*100
     test_list = np.array(test_list)*100
-    times = np.array(times)*1000
     print('Valid Acc:{:.4f}, Std:{:.4f}, Test Acc:{:.4f}, Std:{:.4f}'.format(np.mean(valid_list), np.std(valid_list), np.mean(test_list), np.std(test_list)))
-    print('Mean time :{:.4f}, Std:{:.4f} (ms)'.format(np.mean(times), np.std(times)))
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
