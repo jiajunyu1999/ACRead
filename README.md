@@ -41,12 +41,5 @@ The model configuration is as follows:
    To run the graph classification task with GCN, execute the following command:
 
    ```bash
-   python main.py --read_op acread --dataset NCI1 --gnn gcn
-   ```
-
-2. **Using MLP as the Backbone**  
-   To run the graph classification task with MLP, execute the following command:
-
-   ```bash
-   python main.py --read_op acread --dataset NCI1 --gnn mlp
+   python main.py --read_op acread --dataset NCI1 --gnn gcn --head 8 --batch_size 512 
    ```
